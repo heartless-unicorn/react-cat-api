@@ -24,11 +24,11 @@ export default function Navigation() {
         </div>
 
         <div>
+          <Link to="/voting" onClick={() => isActive(true)}>
+            Voting
+          </Link>
           <Link to="/breeds" onClick={() => isActive(true)}>
             Breeds
-          </Link>
-          <Link to="/voting" onClick={() => isActive(true)}>
-            Votes
           </Link>
           <Link to="/gallery" onClick={() => isActive(true)}>
             Gallery
