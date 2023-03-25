@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import Routes from "../../routes/Routes";
@@ -8,12 +8,12 @@ import "./Navigation.css";
 import logo from "../../media/logo.svg";
 
 export default function Navigation() {
-  let [active, isActive] = useState(false);
+  let location = useLocation();
 
   return (
     <div className="Navigation">
       <div className="info-module column">
-        <div>{active && <Search />}</div>
+        <div>{location.pathname !== "/" && <Search />}</div>
         <Routes />
       </div>
       <div className="nav-module column">
@@ -24,15 +24,9 @@ export default function Navigation() {
         </div>
 
         <div>
-          <Link to="/voting" onClick={() => isActive(true)}>
-            Voting
-          </Link>
-          <Link to="/breeds" onClick={() => isActive(true)}>
-            Breeds
-          </Link>
-          <Link to="/gallery" onClick={() => isActive(true)}>
-            Gallery
-          </Link>
+          <Link to="/voting">Voting</Link>
+          <Link to="/breeds">Breeds</Link>
+          <Link to="/gallery">Gallery</Link>
         </div>
       </div>
     </div>
