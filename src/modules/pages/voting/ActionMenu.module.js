@@ -4,11 +4,9 @@ import { useState } from "react";
 export default function ActionMenu(response) {
   const dispatch = useDispatch();
   const [lattestActions, setLattestAction] = useState([]);
-  const store = useSelector((store) => store);
 
-  const [favorite, isFavorite] = useState(
-    !store.favorite.includes(response.data.id)
-  );
+  const store = useSelector((store) => store);
+  const favorite = !store.favorite.includes(response.data.id);
 
   function handleAction(act) {
     const currentTime = new Date();
@@ -21,7 +19,7 @@ export default function ActionMenu(response) {
       ...curr,
       {
         id: response.data.id,
-        time: `${currentTime.getHours()}: ${currentTime.getMinutes()}`,
+        time: `${currentTime.getHours()}:${currentTime.getMinutes()}`,
         action: (function () {
           if (act === "ADD_TO_LIKES") {
             return "added to likes";

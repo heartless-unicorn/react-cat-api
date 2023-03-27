@@ -6,8 +6,6 @@ import ActionMenu from "./ActionMenu.module";
 export default function Voting() {
   const [randomImg, setRandomImg] = useState({});
 
-  // const store = useSelector((state) => state);
-
   useEffect(() => fetchImg(), []);
   function fetchImg() {
     fetch("https://api.thecatapi.com/v1/images/search")

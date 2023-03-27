@@ -5,11 +5,14 @@ let actionLog = localStorage.getItem("actionLog")
       liked: [],
       disliked: [],
       favorite: [],
+      userAction: [],
     };
 function manageLikes(state = actionLog, action) {
+  const currentTime = new Date();
   switch (action.type) {
     case "ADD_TO_LIKES": {
       state["liked"].push(action.payload);
+
       return state;
     }
     case "ADD_TO_DISLIKES": {
