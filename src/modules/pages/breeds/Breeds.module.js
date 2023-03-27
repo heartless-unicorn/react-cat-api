@@ -11,24 +11,21 @@ export default function Breeds() {
     "live_KFI6LB7w6qzReMGnCyNwSPHqXw00jkLK5V0dmEd0PwwCuDP4IjBnBs7ZnqVq7Gw6";
 
   useEffect(() => {
-    const fetchBreedData = async function () {
-      await fetch("https://api.thecatapi.com/v1/breeds/")
-        .then((response) => response.json())
-        .then((value) => {
-          getBreeds(
-            value.map((el) => {
-              return {
-                name: el.name,
-                id: el.id,
-                img: el.reference_image_id,
-              };
-            })
-          );
-          console.log("in first");
-        })
-        .catch((err) => console.log(err));
-    };
-    fetchBreedData();
+    fetch("https://api.thecatapi.com/v1/breeds/")
+      .then((response) => response.json())
+      .then((value) => {
+        getBreeds(
+          value.map((el) => {
+            return {
+              name: el.name,
+              id: el.id,
+              img: el.reference_image_id,
+            };
+          })
+        );
+        console.log("in first");
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const sendData = useCallback(

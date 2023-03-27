@@ -14,9 +14,8 @@ export default function Routes() {
     <div>
       <MainRoutes>
         <Route path="/voting" element={<Voting />} />
-        <Route path="/breeds" element={<Breeds />}>
-          <Route path=":id" element={<SelectedBreed />} />
-        </Route>
+        <Route path="/breeds" element={<Breeds />}></Route>
+        <Route path="breeds/:id" element={<SelectedBreed />} />
         <Route path="/gallery" element={<Gallery />} />
 
         <Route path="/likes" element={<Likes />} />
