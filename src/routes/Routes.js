@@ -8,6 +8,7 @@ import Voting from "../modules/pages/voting/Voting.module";
 import Likes from "../modules/pages/votes/Likes.module";
 import Dislikes from "../modules/pages/votes/Dislikes.module";
 import Favorite from "../modules/pages/votes/Favorite.module";
+import Upload from "../modules/pages/gallery/Upload.module";
 
 export default function Routes() {
   return (
@@ -16,7 +17,9 @@ export default function Routes() {
         <Route path="/voting" element={<Voting />} />
         <Route path="/breeds" element={<Breeds />}></Route>
         <Route path="breeds/:id" element={<SelectedBreed />} />
+
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/upload" element={<Upload />} />
 
         <Route path="/likes" element={<Likes />} />
         <Route path="/dislikes" element={<Dislikes />} />

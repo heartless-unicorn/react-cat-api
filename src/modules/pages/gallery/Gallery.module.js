@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Outlet, Link } from "react-router-dom";
 import Upload from "./Upload.module";
 
 export default function Gallery() {
@@ -41,8 +42,8 @@ export default function Gallery() {
             <option value="15">Limit: 15</option>
             <option value="20">Limit: 20</option>
           </select>
-          <Upload />
         </form>
+        <Link to="/upload">Upload</Link>
       </div>
       <div>
         {imagesUrl.map((el, i) => {
