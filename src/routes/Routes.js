@@ -9,12 +9,15 @@ import Likes from "../modules/pages/votes/Likes.module";
 import Dislikes from "../modules/pages/votes/Dislikes.module";
 import Favorite from "../modules/pages/votes/Favorite.module";
 import Upload from "../modules/pages/gallery/Upload.module";
+import SearchResult from "../modules/pages/SearchResult.module";
 
 export default function Routes() {
   return (
     <div>
       <MainRoutes>
+        <Route path="/search/:breed" element={<SearchResult />} />
         <Route path="/voting" element={<Voting />} />
+
         <Route path="/breeds" element={<Breeds />}></Route>
         <Route path="breeds/:id" element={<SelectedBreed />} />
 

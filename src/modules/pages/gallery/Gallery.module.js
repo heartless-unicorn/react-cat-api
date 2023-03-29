@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { Outlet, Link } from "react-router-dom";
-import Upload from "./Upload.module";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 
 export default function Gallery() {
+  const favorite = useSelector((store) => store["favorite"]);
+  const dispatch = useDispatch();
+
   const [limit, setLimit] = useState("10");
   const [isReversed, reverse] = useState("RAND");
   const [imagesUrl, setImagesUrl] = useState([]);
@@ -13,8 +16,8 @@ export default function Gallery() {
   useEffect(() => {
     fetchPics();
   }, [isReversed, limit]);
+
   function fetchPics() {
-    console.log("here", limit);
     fetch(
       ` https://api.thecatapi.com/v1/images/search?limit=${limit}&order=${isReversed}&api_key=${APIkey}`
     )
@@ -23,7 +26,21 @@ export default function Gallery() {
         setImagesUrl(data.map((el) => el.id));
       });
   }
-  console.log(imagesUrl);
+
+  function manageFav(id) {
+    if (favorite.includes(id)) {
+      dispatch({
+        type: "REMOVE_FROM_FAVORITE",
+        payload: id,
+      });
+    } else {
+      dispatch({
+        type: "ADD_TO_FAVORITE",
+        payload: id,
+      });
+    }
+  }
+
   return (
     <div>
       <div>
@@ -49,11 +66,17 @@ export default function Gallery() {
         {imagesUrl.map((el, i) => {
           return (
             <div key={i}>
-              <img
-                src={`https://cdn2.thecatapi.com/images/${el}.jpg`}
-                alt="Cat"
-                style={{ width: 200 }}
-              />
+              <button
+                onClick={() => {
+                  manageFav(el);
+                }}
+              >
+                <img
+                  src={`https://cdn2.thecatapi.com/images/${el}.jpg`}
+                  alt="Cat"
+                  style={{ width: 200 }}
+                />
+              </button>
             </div>
           );
         })}
