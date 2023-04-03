@@ -1,7 +1,7 @@
-.formField {
+.Search {
   padding: 0 20px;
 }
-.formField form {
+.Search form {
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   padding: 10px;
   border-radius: 20px;
 }
-.formField input {
+.Search input {
   all: unset;
   margin-left: 20px;
   width: 80%;

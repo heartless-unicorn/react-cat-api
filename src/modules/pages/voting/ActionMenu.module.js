@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useState } from "react";
 
+import likeLogo from "../../../media/like.png";
+import dislikeLogo from "../../../media/dislike.png";
+import favLogo from "../../../media/favorite.png";
+
+import styles from "./ActionMenu.module.css";
+
 export default function ActionMenu(response) {
   const dispatch = useDispatch();
   const [lattestActions, setLattestAction] = useState([]);
@@ -37,33 +43,37 @@ export default function ActionMenu(response) {
   }
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          handleAction("ADD_TO_LIKES");
-        }}
-      >
-        Like
-      </button>
-      <button
-        onClick={() => {
-          handleAction("ADD_TO_DISLIKES");
-        }}
-      >
-        Dislike
-      </button>
-      <button
-        onClick={() => {
-          if (favorite) {
-            handleAction("ADD_TO_FAVORITE");
-          } else {
-            handleAction("REMOVE_FROM_FAVORITE");
-          }
-        }}
-      >
-        Favorite
-      </button>
-
+    <div className={styles.ActionMenu}>
+      <div className={styles.action_buttons}>
+        <button
+          onClick={() => {
+            handleAction("ADD_TO_LIKES");
+          }}
+          className={styles.likeButton}
+        >
+          <img src={likeLogo} alt="Like" />
+        </button>
+        <button
+          onClick={() => {
+            if (favorite) {
+              handleAction("ADD_TO_FAVORITE");
+            } else {
+              handleAction("REMOVE_FROM_FAVORITE");
+            }
+          }}
+          className={styles.likeButton}
+        >
+          <img src={favLogo} alt="Favorite" />
+        </button>
+        <button
+          onClick={() => {
+            handleAction("ADD_TO_DISLIKES");
+          }}
+          className={styles.likeButton}
+        >
+          <img src={dislikeLogo} alt="Dislike" />
+        </button>
+      </div>
       <div>
         {lattestActions.map((el, i) => {
           return (

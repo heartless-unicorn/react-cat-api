@@ -89,3 +89,10 @@
   right: 0;
   height: 100% !important;
 }
+.main_info {
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 20px;
+  padding: 20px;
+  height: 100vh;
+}

@@ -20,7 +20,7 @@ export default function Search() {
   }
 
   return (
-    <div className={`row ${styles.formField}`}>
+    <div className={`row ${styles.Search}`}>
       <div className={`col-8`}>
         <form>
           <input

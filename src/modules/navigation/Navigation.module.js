@@ -17,7 +17,7 @@ export default function Navigation() {
   return (
     <div className={`container-fluid ${styles.Navigation}`}>
       <div className="row flex-row-reverse">
-        <div className="info-module col-6">
+        <div className={`col-6 ${styles.info_module}`}>
           <div>
             {location.pathname !== "/" ? (
               <Search />
@@ -32,8 +32,9 @@ export default function Navigation() {
               </div>
             )}
           </div>
-
-          <Routes />
+          <div className={styles.main_info}>
+            <Routes />
+          </div>
         </div>
         <div className={`col-6 ${styles.nav_module}`}>
           <div className={styles.hero}>

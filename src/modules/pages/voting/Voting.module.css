@@ -1,0 +1,33 @@
+/* .backNav {
+ 
+} */
+.backNav button {
+  padding: 10px;
+  border: 0;
+  background-color: #fbe0dc;
+  border-radius: 10px;
+}
+.backNav p {
+  display: inline-block;
+  color: white;
+  background-color: #ff868e;
+
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 2px;
+
+  padding: 5px 30px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.imageBox {
+  text-align: center;
+  width: 100%;
+}
+.imageBox img {
+  width: 100%;
+  border-radius: 20px;
+  padding: 10px;
+}
