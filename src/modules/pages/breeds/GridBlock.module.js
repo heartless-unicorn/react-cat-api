@@ -4,7 +4,7 @@ import styles from "./breedStyles/GridBlock.module.css";
 export default function GridBlock(images, key) {
   return (
     <div className={`container ${styles.Block}`} key={key}>
-      <div className="row">
+      <div className={key % 2 === 0 ? "row flex-row-reverse" : "row"}>
         <div className="col-4">
           <Link to={`${images[0]}`}>
             {0}
@@ -24,7 +24,7 @@ export default function GridBlock(images, key) {
           </Link>
         </div>
         <div className="col-8">
-          <div className="twopics row">
+          <div className={`row ${styles.two_pics}`}>
             <div className="col-6">
               <Link to={`${images[2]}`}>
                 {2}

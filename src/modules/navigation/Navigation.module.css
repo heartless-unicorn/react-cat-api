@@ -1,0 +1,91 @@
+.Navigation {
+  padding: 30px;
+  background-color: #f8f8f7;
+  height: 100vh;
+  font-family: "Jost";
+}
+.nav_module {
+  padding-left: 10% !important;
+}
+.hero img {
+  margin-bottom: 85px;
+}
+.hero h1 {
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 58px;
+  color: #1d1d1d;
+}
+.hero h4 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 29px;
+  color: #8c8c8c;
+  margin-top: 10px;
+}
+
+.hero h3 {
+  margin-top: 60px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 29px;
+  color: #1d1d1d;
+}
+.nav_box {
+  margin-top: 20px;
+}
+
+.nav_box p {
+  background: #ffffff;
+  margin-top: 10px;
+  width: 135px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px 0 10px;
+  color: #ff868e;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 2px;
+}
+.nav_box a {
+  text-decoration: none;
+}
+.nav_container {
+  border: 4px solid white;
+  border-radius: 20px;
+  text-align: center;
+  width: 135px;
+}
+
+.votingNav {
+  background-color: #b4b7ff;
+  border-color: rgba(255, 255, 255, 0.6);
+  padding: 35px 19px;
+}
+.breedNav {
+  background-color: #97eab9;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.galleryNav {
+  background-color: #ffd280;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.rectangle {
+  width: 650px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  bottom: 30px;
+  z-index: 0;
+  background-color: #fbe0dc;
+  border-radius: 20px;
+}
+.heroImg {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  height: 100% !important;
+}

@@ -1,32 +1,76 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
 
 import Routes from "../../routes/Routes";
 import Search from "./Search.module";
 
-import "./Navigation.css";
+import styles from "./Navigation.module.css";
+
 import logo from "../../media/logo.svg";
+import heroImg from "../../media/girl-and-pet.png";
+import votingImg from "../../media/vote-table.png";
+import breedsImg from "../../media/pet-breeds.png";
+import galleryImg from "../../media/images-search.png";
 
 export default function Navigation() {
   let location = useLocation();
 
   return (
-    <div className="Navigation">
-      <div className="info-module column">
-        <div>{location.pathname !== "/" && <Search />}</div>
-        <Routes />
-      </div>
-      <div className="nav-module column">
-        <div>
-          <img src={logo} alt="PetsPaw Logo" />
-          <h1>Hello</h1>
-          <h3>Welcome to my Cat API App</h3>
-        </div>
+    <div className={`container-fluid ${styles.Navigation}`}>
+      <div className="row flex-row-reverse">
+        <div className="info-module col-6">
+          <div>
+            {location.pathname !== "/" ? (
+              <Search />
+            ) : (
+              <div>
+                <div className={styles.rectangle}></div>
+                <img
+                  src={heroImg}
+                  alt="Girl and Cat"
+                  className={`img-fluid ${styles.heroImg}`}
+                />
+              </div>
+            )}
+          </div>
 
-        <div>
-          <Link to="/voting">Voting</Link>
-          <Link to="/breeds">Breeds</Link>
-          <Link to="/gallery">Gallery</Link>
+          <Routes />
+        </div>
+        <div className={`col-6 ${styles.nav_module}`}>
+          <div className={styles.hero}>
+            <img src={logo} alt="PetsPaw Logo" />
+            <h1>Hello!</h1>
+            <h4>Welcome to my Cat project</h4>
+            <h3>Lets start using The Cat API</h3>
+          </div>
+
+          <div className={`row ${styles.nav_box}`}>
+            <div className="col">
+              <Link to="/voting">
+                <div className={` ${styles.votingNav} ${styles.nav_container}`}>
+                  <img src={votingImg} alt="Voting" className={`img-fluid`} />
+                </div>
+                <p>Voting</p>
+              </Link>
+            </div>
+            <div className="col">
+              <Link to="/breeds">
+                <div className={` ${styles.breedNav} ${styles.nav_container}`}>
+                  <img src={breedsImg} alt="Breeds" className={`img-fluid`} />
+                </div>
+                <p>Breeds</p>
+              </Link>
+            </div>
+            <div className="col">
+              <Link to="/gallery">
+                <div
+                  className={` ${styles.galleryNav} ${styles.nav_container}`}
+                >
+                  <img src={galleryImg} alt="Voting" className={`img-fluid`} />
+                </div>
+                <p>Gallery</p>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
