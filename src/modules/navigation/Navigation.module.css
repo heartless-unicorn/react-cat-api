@@ -1,7 +1,7 @@
 .Navigation {
   padding: 30px;
   background-color: #f8f8f7;
-  height: 100vh;
+  height: 100%;
   font-family: "Jost";
 }
 .nav_module {
@@ -92,7 +92,8 @@
 .main_info {
   background-color: white;
   margin-top: 10px;
+  margin-bottom: 20px;
   border-radius: 20px;
   padding: 20px;
-  height: 100vh;
+  height: 100%;
 }

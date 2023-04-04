@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useState } from "react";
 
-import likeLogo from "../../../media/like.png";
-import dislikeLogo from "../../../media/dislike.png";
-import favLogo from "../../../media/favorite.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFaceFrown,
+  faFaceSmile,
+  faHeart,
+} from "@fortawesome/free-regular-svg-icons";
 
 import styles from "./ActionMenu.module.css";
 
@@ -51,7 +54,7 @@ export default function ActionMenu(response) {
           }}
           className={styles.likeButton}
         >
-          <img src={likeLogo} alt="Like" />
+          <FontAwesomeIcon icon={faFaceSmile} />
         </button>
         <button
           onClick={() => {
@@ -61,26 +64,39 @@ export default function ActionMenu(response) {
               handleAction("REMOVE_FROM_FAVORITE");
             }
           }}
-          className={styles.likeButton}
+          className={styles.favButton}
         >
-          <img src={favLogo} alt="Favorite" />
+          <FontAwesomeIcon icon={faHeart} />
         </button>
         <button
           onClick={() => {
             handleAction("ADD_TO_DISLIKES");
           }}
-          className={styles.likeButton}
+          className={styles.dislikeButton}
         >
-          <img src={dislikeLogo} alt="Dislike" />
+          <FontAwesomeIcon icon={faFaceFrown} />
         </button>
       </div>
-      <div>
+      <div className={styles.actionLog}>
         {lattestActions.map((el, i) => {
+          let icon;
+          if (el.action === "added to likes") {
+            icon = (
+              <FontAwesomeIcon icon={faFaceSmile} className={styles.like} />
+            );
+          } else if (el.action === "added to dislikes") {
+            icon = (
+              <FontAwesomeIcon icon={faFaceFrown} className={styles.dislike} />
+            );
+          } else {
+            icon = <FontAwesomeIcon icon={faHeart} className={styles.fav} />;
+          }
           return (
-            <div key={i}>
+            <div key={i} className={styles.actionField}>
               <p>
                 <span>{el.time}</span> Image ID: <b>{el.id}</b> was {el.action}
               </p>
+              <div>{icon}</div>
             </div>
           );
         })}
