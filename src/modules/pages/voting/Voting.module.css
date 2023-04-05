@@ -2,10 +2,12 @@
  
 } */
 .backNav button {
-  padding: 10px;
+  padding: 5px 15px;
   border: 0;
   background-color: #fbe0dc;
   border-radius: 10px;
+  color: #ff868e;
+  font-size: 20px;
 }
 .backNav p {
   display: inline-block;

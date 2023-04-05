@@ -4,7 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./Search.module.css";
 
-import searchLogo from "../../media/search.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFaceFrown,
+  faFaceSmile,
+  faHeart,
+} from "@fortawesome/free-regular-svg-icons";
+
 import likeLogo from "../../media/like.png";
 import dislikeLogo from "../../media/dislike.png";
 import favLogo from "../../media/favorite.png";
@@ -29,9 +36,8 @@ export default function Search() {
             placeholder="Search for breeds by name"
           />
           <div className={styles.searchLogo}>
-            <img
-              src={searchLogo}
-              alt="Search"
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
               onClick={(e) => {
                 showSearchResult(e);
               }}
@@ -41,15 +47,15 @@ export default function Search() {
       </div>
       <div className={`col-4 ${styles.likeMenu}`}>
         <Link to="../likes">
-          <img src={likeLogo} alt="Like" />
+          <FontAwesomeIcon icon={faFaceSmile} />
         </Link>
 
         <Link to="../dislikes">
-          <img src={favLogo} alt="Favorite" />
+          <FontAwesomeIcon icon={faHeart} className={styles.fav} />
         </Link>
 
         <Link to="../favorite">
-          <img src={dislikeLogo} alt="Disike" />
+          <FontAwesomeIcon icon={faFaceFrown} />
         </Link>
       </div>
     </div>

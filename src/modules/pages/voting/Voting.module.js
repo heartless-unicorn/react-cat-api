@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import ActionMenu from "./ActionMenu.module";
 
-import backButton from "../../../media/back.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Voting.module.css";
 
@@ -30,7 +31,7 @@ export default function Voting() {
             navigate(-1);
           }}
         >
-          <img src={backButton} alt="back" />
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <p>Voting</p>
       </div>

@@ -1,6 +1,3 @@
-.Search {
-  padding: 0 20px;
-}
 .Search form {
   background-color: white;
   display: flex;
@@ -16,8 +13,10 @@
 }
 .searchLogo {
   background-color: #fbe0dc;
-  padding: 10px;
+  padding: 7px 10px;
   border-radius: 10px;
+  color: #ff868e;
+  font-size: 20px;
 }
 .likeMenu {
   display: flex;
@@ -27,6 +26,8 @@
 }
 .likeMenu a {
   background-color: white;
-  padding: 15px;
+  padding: 10px 15px;
   border-radius: 10px;
+  color: #ff868e;
+  font-size: 25px;
 }

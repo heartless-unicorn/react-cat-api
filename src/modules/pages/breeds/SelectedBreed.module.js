@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+
+import styles from "./breedStyles/SelectedBreed.module.css";
+
 export default function SelectedBreed() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [breedInfo, setBreedInfo] = useState(null);
   const [ready, setReady] = useState(false);
@@ -26,23 +34,61 @@ export default function SelectedBreed() {
   }, [id]);
   if (ready) {
     return (
-      <div>
-        <div>
-          <img src={breedInfo[0].url} alt="Cat" style={{ width: 300 }} />
+      <div className={styles.SelectedBreed}>
+        <div className={styles.selectedBreedNav}>
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+            className={styles.backButton}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+          <p> Breeds</p>
+          <span>{id}</span>
         </div>
-        <div>
-          <h2>{breedInfo[0].name}</h2>
-          <p>{breedInfo[0].description}</p>
+        <div className={styles.imageBox}>
+          <img src={breedInfo[0].url} alt="Cat" />
         </div>
-        <div>
-          <p>{breedInfo[0].temperament}</p>
-          <p>{breedInfo[0].origin}</p>
-          <p>{breedInfo[0].weight} kg</p>
-          <p>{breedInfo[0].lifespan} years</p>
+        <div className={styles.infoHeaderBox}>
+          <div className={styles.name}>
+            <h1>{breedInfo[0].name}</h1>
+
+            <p>{breedInfo[0].description}</p>
+          </div>
+          <div className={`row ${styles.infoBox}`}>
+            <div className="col-6">
+              <p>
+                <span>Temperament:</span> <br />
+                {breedInfo[0].temperament}
+              </p>
+            </div>
+            <div className="col-6">
+              <p>
+                <span>Origin: </span>
+                {breedInfo[0].origin}
+              </p>
+              <p>
+                <span>Weight: </span>
+                {breedInfo[0].weight} kg
+              </p>
+              <p>
+                <span>Life span: </span>
+                {breedInfo[0].lifespan} years
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
   } else {
-    return <div>Waiting...</div>;
+    return (
+      <div className={styles.lds_ring}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
 }

@@ -14,8 +14,8 @@
   border-bottom-left-radius: 10px;
 }
 .favButton {
-  border-left: 0;
-  border-right: 0;
+  border-left: 0 !important;
+  border-right: 0 !important;
   background-color: #ff868e;
 }
 .dislikeButton {

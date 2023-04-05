@@ -1,5 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
-import "./breedStyles/Grid.css";
+import { Outlet } from "react-router-dom";
 
 import GridBlock from "./GridBlock.module";
 

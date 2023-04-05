@@ -1,0 +1,61 @@
+.navMenu {
+  display: flex;
+}
+.backButton {
+  padding: 5px 15px;
+  border: 0;
+  background-color: #fbe0dc;
+  border-radius: 10px;
+  color: #ff868e;
+  font-size: 20px;
+}
+.navMenu p {
+  display: inline-block;
+  color: white;
+  background-color: #ff868e;
+
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 2px;
+
+  padding: 5px 30px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.navMenu form {
+  display: flex;
+}
+.formBox select {
+  margin-left: 10px;
+}
+.formBox select::-webkit-scrollbar {
+  width: 0;
+}
+.formBox select {
+  background-color: #f8f8f7;
+  box-shadow: 0;
+  outline: 0;
+  border: none;
+  border-radius: 10px;
+  color: #8c8c8c;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.breedChoices {
+  width: 225px;
+}
+.formBox button {
+  background-color: #f8f8f7;
+  color: #8c8c8c;
+  border: none;
+  margin-left: 10px;
+  border-radius: 10px;
+  padding: 10px 13px;
+}
+.limitForm {
+  width: 120px;
+}

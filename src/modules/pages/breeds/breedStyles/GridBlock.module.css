@@ -1,7 +1,8 @@
-.Block {
-  background-color: black;
+.GridBlock {
   align-items: flex-start;
+  margin: 5px;
 }
-.Block img {
+.GridBlock img {
+  padding: 5px;
   border-radius: 20px;
 }
