@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import Grid from "./Grid.module";
+import getBreeds from "../getBreeds";
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,31 +14,17 @@ import {
 import styles from "./breedStyles/Breeds.module.css";
 
 export default function Breeds() {
-  const [breeds, getBreeds] = useState([]);
   const [gridData, setGridData] = useState([]);
   const [isReversed, reverse] = useState(false);
   const [limit, setLimit] = useState(10);
-
+  const [breeds, setBreeds] = useState([]);
   const navigate = useNavigate();
   const APIkey =
     "live_KFI6LB7w6qzReMGnCyNwSPHqXw00jkLK5V0dmEd0PwwCuDP4IjBnBs7ZnqVq7Gw6";
 
   useEffect(() => {
-    fetch("https://api.thecatapi.com/v1/breeds/")
-      .then((response) => response.json())
-      .then((value) => {
-        getBreeds(
-          value.map((el) => {
-            return {
-              name: el.name,
-              id: el.id,
-              img: el.reference_image_id,
-            };
-          })
-        );
-        console.log("in first");
-      })
-      .catch((err) => console.log(err));
+    getBreeds().then((res) => setBreeds(res));
+    sendData();
   }, []);
 
   const sendData = useCallback(
@@ -53,9 +40,11 @@ export default function Breeds() {
     },
     [breeds, isReversed, limit]
   );
+
   useEffect(() => {
     sendData();
-  }, [sendData, breeds, isReversed, limit]);
+  }, [sendData, isReversed, limit]);
+
   const getSpecificBreed = useCallback(
     async function (id) {
       await fetch(
@@ -68,6 +57,10 @@ export default function Breeds() {
     },
     [sendData]
   );
+
+  function navToPic(id) {
+    navigate(`${id}`);
+  }
 
   return (
     <div className={styles.Breeds}>
@@ -129,7 +122,7 @@ export default function Breeds() {
         </div>
       </div>
 
-      <Grid data={gridData} />
+      <Grid data={gridData} func={navToPic} />
     </div>
   );
 }

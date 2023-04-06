@@ -11,7 +11,7 @@ export default function Grid(response) {
       {(() => {
         const blocks = [];
         for (let i = 1; i <= amountofBlocks; i++) {
-          blocks.push(GridBlock(data.splice(0, 5), i));
+          blocks.push(GridBlock(data.splice(0, 5), i, response.func));
         }
         return blocks.map((el) => el);
       })()}

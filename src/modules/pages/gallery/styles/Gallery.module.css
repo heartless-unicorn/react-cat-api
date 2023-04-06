@@ -1,0 +1,40 @@
+.navMenu {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.backButton {
+  padding: 5px 15px;
+  border: 0;
+  background-color: #fbe0dc;
+  border-radius: 10px;
+  color: #ff868e;
+  font-size: 20px;
+}
+.navMenu p {
+  display: inline-block;
+  color: white;
+  background-color: #ff868e;
+
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 2px;
+
+  padding: 5px 30px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.uploadLink {
+  background-color: #fbe0dc;
+  color: #ff868e;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 16px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+}
