@@ -21,7 +21,6 @@ export default function Search() {
   const navigate = useNavigate();
 
   function showSearchResult(e) {
-    console.log(search);
     e.preventDefault();
     navigate(`/search/${search.trim().toLowerCase()}`);
   }

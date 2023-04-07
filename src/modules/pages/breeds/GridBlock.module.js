@@ -1,6 +1,7 @@
 import styles from "./breedStyles/GridBlock.module.css";
 
 export default function GridBlock(images, key, func) {
+  console.log("here in Block");
   return (
     <div className={`container ${styles.GridBlock}`} key={key}>
       <div className={key % 2 === 0 ? "row flex-row-reverse" : "row"}>
