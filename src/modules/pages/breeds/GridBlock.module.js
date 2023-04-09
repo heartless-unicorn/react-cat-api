@@ -1,25 +1,31 @@
+import { useEffect, useState } from "react";
 import styles from "./breedStyles/GridBlock.module.css";
 
 export default function GridBlock(images, key, func) {
-  console.log("here in Block");
+  const [click, clicked] = useState(0);
+  useEffect(() => {
+    console.log("here");
+  }, [click]);
   return (
     <div className={`container ${styles.GridBlock}`} key={key}>
       <div className={key % 2 === 0 ? "row flex-row-reverse" : "row"}>
         <div className="col-4">
           <img
-            src={`https://cdn2.thecatapi.com/images/${images[0]}.jpg`}
+            src={images[0].url}
             alt="Cat"
-            className="img-fluid"
+            className={"img-fluid"}
             onClick={() => {
-              func(images[0]);
+              clicked((cur) => cur + 1);
+              func(images[0].id);
             }}
           />
           <img
-            src={`https://cdn2.thecatapi.com/images/${images[1]}.jpg`}
+            src={images.length < 2 ? null : images[1].url}
             alt="Cat"
-            className="img-fluid"
+            className={images.length < 2 ? "d-none" : "img-fluid"}
             onClick={() => {
-              func(images[1]);
+              clicked((cur) => cur + 1);
+              func(images[1].id);
             }}
           />
         </div>
@@ -27,32 +33,35 @@ export default function GridBlock(images, key, func) {
           <div className={`row ${styles.two_pics}`}>
             <div className="col-6">
               <img
-                src={`https://cdn2.thecatapi.com/images/${images[2]}.jpg`}
+                src={images.length < 3 ? null : images[2].url}
                 alt="Cat"
-                className="img-fluid"
+                className={images.length < 3 ? "d-none" : "img-fluid"}
                 onClick={() => {
-                  func(images[2]);
+                  clicked((cur) => cur + 1);
+                  func(images[2].id);
                 }}
               />
             </div>
             <div className="col-6">
               <img
-                src={`https://cdn2.thecatapi.com/images/${images[3]}.jpg`}
+                src={images.length < 4 ? null : images[3].url}
                 alt="Cat"
-                className="img-fluid"
+                className={images.length < 4 ? "d-none" : "img-fluid"}
                 onClick={() => {
-                  func(images[3]);
+                  clicked((cur) => cur + 1);
+                  func(images[3].id);
                 }}
               />
             </div>
           </div>
           <div>
             <img
-              src={`https://cdn2.thecatapi.com/images/${images[4]}.jpg`}
+              src={images.length < 5 ? null : images[4].url}
               alt="Cat"
-              className="img-fluid"
+              className={images.length < 5 ? "d-none" : "img-fluid"}
               onClick={() => {
-                func(images[4]);
+                clicked((cur) => cur + 1);
+                func(images[4].id);
               }}
             />
           </div>

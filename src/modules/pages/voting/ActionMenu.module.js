@@ -19,9 +19,13 @@ export default function ActionMenu(response) {
 
   function handleAction(act) {
     const currentTime = new Date();
+
     dispatch({
       type: act,
-      payload: response.data.id,
+      payload: {
+        url: response.data.url,
+        id: response.data.id,
+      },
     });
 
     setLattestAction((curr) => [

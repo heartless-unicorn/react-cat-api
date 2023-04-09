@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import GridBlock from "./GridBlock.module";
 
 export default function Grid(response) {
-  const data = response.data;
+  const data = Array.from(response.data);
   let amountofBlocks = response.data.length / 5;
   return (
     <div className="Grid">

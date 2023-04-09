@@ -30,7 +30,12 @@ export default function Breeds() {
   const sendData = useCallback(
     function (arr) {
       if (!arr) {
-        arr = breeds.map((el) => el.img);
+        arr = breeds.map((el) => {
+          return {
+            id: el.img,
+            url: `https://cdn2.thecatapi.com/images/${el.img}.jpg`,
+          };
+        });
       }
       if (isReversed) {
         setGridData(arr.reverse().slice(0, limit));
@@ -52,7 +57,14 @@ export default function Breeds() {
       )
         .then((response) => response.json())
         .then((data) => {
-          sendData(data.map((el) => el.id));
+          sendData(
+            data.map((el) => {
+              return {
+                id: el.id,
+                url: `https://cdn2.thecatapi.com/images/${el.id}.jpg`,
+              };
+            })
+          );
         });
     },
     [sendData]

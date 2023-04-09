@@ -14,7 +14,14 @@ export default function SearchResult() {
         setsearchResult([]);
         data.map((el) => {
           if (el.name.toLowerCase().includes(breed)) {
-            setsearchResult((cur) => [...cur, el.reference_image_id]);
+            console.log(el);
+            setsearchResult((cur) => [
+              ...cur,
+              {
+                id: el.reference_image_id,
+                url: `https://cdn2.thecatapi.com/images/${el.reference_image_id}.jpg`,
+              },
+            ]);
           }
         });
         console.log("here");

@@ -1,14 +1,13 @@
 import { createStore } from "redux";
-let actionLog = localStorage.getItem("actionLog")
-  ? JSON.parse(localStorage.getItem("actionLog"))
-  : {
-      liked: [],
-      disliked: [],
-      favorite: [],
-      userAction: [],
-    };
+
+let actionLog = JSON.parse(localStorage.getItem("actionLog"));
+// : {
+//     liked: [],
+//     disliked: [],
+//     favorite: [],
+//   };
+
 function manageLikes(state = actionLog, action) {
-  const currentTime = new Date();
   switch (action.type) {
     case "ADD_TO_LIKES": {
       state["liked"].push(action.payload);
@@ -24,7 +23,10 @@ function manageLikes(state = actionLog, action) {
       return state;
     }
     case "REMOVE_FROM_FAVORITE": {
-      state["favorite"].splice(state["favorite"].indexOf(action.payload), 1);
+      const index = state["favorite"].findIndex((el) => {
+        return el.id === action.payload;
+      });
+      state["favorite"].splice(index, 1);
       return state;
     }
     default:

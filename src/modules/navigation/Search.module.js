@@ -12,23 +12,24 @@ import {
   faHeart,
 } from "@fortawesome/free-regular-svg-icons";
 
-import likeLogo from "../../media/like.png";
-import dislikeLogo from "../../media/dislike.png";
-import favLogo from "../../media/favorite.png";
-
 export default function Search() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  function showSearchResult(e) {
-    e.preventDefault();
+  function showSearchResult(event) {
+    event.preventDefault();
     navigate(`/search/${search.trim().toLowerCase()}`);
   }
 
   return (
     <div className={`row ${styles.Search}`}>
       <div className={`col-8`}>
-        <form>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            showSearchResult(e);
+          }}
+        >
           <input
             type="search"
             onChange={(e) => setSearch(e.target.value)}
