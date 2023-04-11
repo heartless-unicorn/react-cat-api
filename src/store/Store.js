@@ -1,42 +1,64 @@
 import { createStore } from "redux";
 
-let actionLog = JSON.parse(localStorage.getItem("actionLog"));
-// : {
-//     liked: [],
-//     disliked: [],
-//     favorite: [],
-//   };
+let actionLog = {
+  liked: [],
+  disliked: [],
+  favorite: [],
+};
 
 function manageLikes(state = actionLog, action) {
   switch (action.type) {
     case "ADD_TO_LIKES": {
-      state["liked"].push(action.payload);
+      let liked = [...state["liked"], action.payload];
 
-      return state;
+      return { ...state, liked };
     }
     case "ADD_TO_DISLIKES": {
-      state["disliked"].push(action.payload);
-      return state;
+      console.log(action, state);
+      let disliked = [...state["disliked"], action.payload];
+      return { ...state, disliked };
     }
     case "ADD_TO_FAVORITE": {
-      state["favorite"].push(action.payload);
-      return state;
+      let favorite = [...state["favorite"], action.payload];
+      return { ...state, favorite };
     }
     case "REMOVE_FROM_FAVORITE": {
-      const index = state["favorite"].findIndex((el) => {
-        return el.id === action.payload;
+      let favoriteRemoved = state["favorite"].filter((el) => {
+        return el.id !== action.payload;
       });
-      state["favorite"].splice(index, 1);
-      return state;
+      return { ...state, favorite: favoriteRemoved };
     }
     default:
       return state;
   }
 }
-const store = createStore(manageLikes);
+
+function saveStateToLocalStorage(state) {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("state", serializedState);
+  } catch (e) {
+    console.error("Error saving state to localStorage:", e);
+  }
+}
+function loadStateFromLocalStorage() {
+  try {
+    const serializedState = localStorage.getItem("state");
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    console.error("Error loading state from localStorage:", e);
+    return undefined;
+  }
+}
+const persistedState = loadStateFromLocalStorage();
+const store = createStore(manageLikes, persistedState);
+
 store.subscribe(() => {
-  localStorage.setItem("actionLog", JSON.stringify(actionLog));
-  console.log(actionLog);
+  saveStateToLocalStorage(store.getState());
+  console.log(store.getState());
 });
 
 export default store;

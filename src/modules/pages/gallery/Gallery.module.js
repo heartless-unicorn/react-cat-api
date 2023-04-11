@@ -14,7 +14,10 @@ import getBreeds from "../getBreeds";
 import styles from "./styles/Gallery.module.css";
 
 export default function Gallery() {
-  const favorite = useSelector((store) => store["favorite"]);
+  const favorite = useSelector((state) => state.favorite);
+  const isFavorite = function (index) {
+    return favorite.some((item) => item.id === index);
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -87,17 +90,22 @@ export default function Gallery() {
     [sendData]
   );
 
-  function manageFav(id) {
-    if (favorite.includes(id)) {
+  function manageFav(id, url) {
+    if (isFavorite(id)) {
       dispatch({
         type: "REMOVE_FROM_FAVORITE",
         payload: id,
       });
+      return false;
     } else {
       dispatch({
         type: "ADD_TO_FAVORITE",
-        payload: id,
+        payload: {
+          id: id,
+          url: url,
+        },
       });
+      return true;
     }
   }
 
@@ -165,7 +173,7 @@ export default function Gallery() {
                 <option value="defaut">All breeds</option>
                 {breeds.map((el, i) => {
                   return (
-                    <option value={el.id} key={i}>
+                    <option value={el.breed_id} key={i}>
                       {el.name}
                     </option>
                   );
@@ -173,9 +181,8 @@ export default function Gallery() {
               </select>
             </label>
           </div>
-        </form>
       </div>
-      <div>{<Grid data={gridData} func={manageFav} />}</div>
+      <div>{<Grid data={gridData} func={manageFav} effect={"fav"} />}</div>
     </div>
   );
 }

@@ -14,9 +14,8 @@ export default function ActionMenu(response) {
   const dispatch = useDispatch();
   const [lattestActions, setLattestAction] = useState([]);
 
-  const store = useSelector((store) => store);
-  const favorite = !store.favorite.includes(response.data.id);
-
+  const favorite = useSelector((state) => state.favorite);
+  const isFavorite = favorite.some((item) => item.id === response.data.id);
   function handleAction(act) {
     const currentTime = new Date();
 
@@ -62,10 +61,10 @@ export default function ActionMenu(response) {
         </button>
         <button
           onClick={() => {
-            if (favorite) {
-              handleAction("ADD_TO_FAVORITE");
-            } else {
+            if (isFavorite) {
               handleAction("REMOVE_FROM_FAVORITE");
+            } else {
+              handleAction("ADD_TO_FAVORITE");
             }
           }}
           className={styles.favButton}

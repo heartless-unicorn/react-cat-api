@@ -6,8 +6,9 @@ export default async function getBreeds() {
       breeds = value.map((el) => {
         return {
           name: el.name,
-          id: el.id,
-          img: el.reference_image_id,
+          breed_id: el.id,
+          id: el.reference_image_id,
+          url: `https://cdn2.thecatapi.com/images/${el.reference_image_id}.jpg`,
         };
       });
     })

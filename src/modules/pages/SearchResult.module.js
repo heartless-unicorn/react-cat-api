@@ -14,17 +14,17 @@ export default function SearchResult() {
         setsearchResult([]);
         data.map((el) => {
           if (el.name.toLowerCase().includes(breed)) {
-            console.log(el);
             setsearchResult((cur) => [
               ...cur,
               {
                 id: el.reference_image_id,
                 url: `https://cdn2.thecatapi.com/images/${el.reference_image_id}.jpg`,
+                name: el.name,
               },
             ]);
           }
         });
-        console.log("here");
+
         setReady(true);
       });
   }, [breed]);
@@ -38,7 +38,7 @@ export default function SearchResult() {
     return (
       <div>
         {searchResult.length > 0 ? (
-          <Grid data={searchResult} func={navToPic} />
+          <Grid data={searchResult} func={navToPic} effect="name" />
         ) : (
           <p>"No items found"</p>
         )}

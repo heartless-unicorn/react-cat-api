@@ -18,37 +18,32 @@ export default function Breeds() {
   const [isReversed, reverse] = useState(false);
   const [limit, setLimit] = useState(10);
   const [breeds, setBreeds] = useState([]);
+
   const navigate = useNavigate();
+
   const APIkey =
     "live_KFI6LB7w6qzReMGnCyNwSPHqXw00jkLK5V0dmEd0PwwCuDP4IjBnBs7ZnqVq7Gw6";
 
   useEffect(() => {
     getBreeds().then((res) => setBreeds(res));
-    sendData();
   }, []);
 
-  const sendData = useCallback(
-    function (arr) {
-      if (!arr) {
-        arr = breeds.map((el) => {
-          return {
-            id: el.img,
-            url: `https://cdn2.thecatapi.com/images/${el.img}.jpg`,
-          };
-        });
-      }
-      if (isReversed) {
-        setGridData(arr.reverse().slice(0, limit));
-      } else {
-        setGridData(arr.slice(0, limit));
-      }
-    },
-    [breeds, isReversed, limit]
-  );
+  const sendData = function (arr) {
+    if (!arr) {
+      arr = breeds;
+    }
+
+    if (isReversed) {
+      setGridData(arr.reverse().slice(0, limit));
+    } else {
+      setGridData(arr.slice(0, limit));
+    }
+  };
 
   useEffect(() => {
+    console.log("here");
     sendData();
-  }, [sendData, isReversed, limit]);
+  }, [isReversed, limit]);
 
   const getSpecificBreed = useCallback(
     async function (id) {
@@ -57,17 +52,19 @@ export default function Breeds() {
       )
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           sendData(
             data.map((el) => {
               return {
                 id: el.id,
-                url: `https://cdn2.thecatapi.com/images/${el.id}.jpg`,
+                url: el.url,
+                name: el.breeds[0].name,
               };
             })
           );
         });
     },
-    [sendData]
+    [isReversed, limit, setGridData]
   );
 
   function navToPic(id) {
@@ -98,7 +95,7 @@ export default function Breeds() {
               <option value="defaut">All breeds</option>
               {breeds.map((el, i) => {
                 return (
-                  <option value={el.id} key={i}>
+                  <option value={el.breed_id} key={i}>
                     {el.name}
                   </option>
                 );
@@ -134,7 +131,7 @@ export default function Breeds() {
         </div>
       </div>
 
-      <Grid data={gridData} func={navToPic} />
+      <Grid data={gridData} func={navToPic} effect="name" />
     </div>
   );
 }

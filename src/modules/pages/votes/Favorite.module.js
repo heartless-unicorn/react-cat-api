@@ -5,7 +5,7 @@ import Grid from "../breeds/Grid.module";
 export default function Favorite() {
   const favorite = useSelector((store) => store["favorite"]);
   const dispatch = useDispatch();
-
+  useEffect(() => {}, [dispatch]);
   function removefromFav(id) {
     dispatch({
       type: "REMOVE_FROM_FAVORITE",
@@ -14,7 +14,7 @@ export default function Favorite() {
   }
   return (
     <div>
-      <Grid data={favorite} func={removefromFav} />
+      <Grid data={favorite} func={removefromFav} effect={"fav"} />
     </div>
   );
 }

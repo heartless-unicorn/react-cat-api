@@ -50,11 +50,11 @@ export default function Search() {
           <FontAwesomeIcon icon={faFaceSmile} />
         </Link>
 
-        <Link to="../dislikes">
+        <Link to="../favorite">
           <FontAwesomeIcon icon={faHeart} className={styles.fav} />
         </Link>
 
-        <Link to="../favorite">
+        <Link to="../dislikes">
           <FontAwesomeIcon icon={faFaceFrown} />
         </Link>
       </div>

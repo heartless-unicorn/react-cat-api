@@ -2,7 +2,44 @@
   align-items: flex-start;
   margin: 5px;
 }
-.GridBlock img {
-  padding: 5px;
+
+.imageBlock {
+  margin: 10px;
   border-radius: 20px;
+}
+.imageBlock img {
+  border-radius: 20px;
+}
+
+.hoverEffect {
+  display: none;
+  z-index: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  margin: 0;
+  color: #ff868e;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.addToFav {
+  border-radius: 20px;
+}
+.addToFav svg {
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+.imageBlock:hover .hoverEffect {
+  display: block !important;
+}
+.breedName {
+  width: 80%;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
 }

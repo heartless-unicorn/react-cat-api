@@ -1,70 +1,50 @@
-import { useEffect, useState } from "react";
 import styles from "./breedStyles/GridBlock.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
 
-export default function GridBlock(images, key, func) {
-  const [click, clicked] = useState(0);
-  useEffect(() => {
-    console.log("here");
-  }, [click]);
+export default function GridBlock(images, key, func, effect) {
+  function ImageBlock(i) {
+    const [favorite, isFavorite] = useState(null);
+    return (
+      <div
+        className={`position-relative ${styles.imageBlock}`}
+        onClick={() => {
+          isFavorite(func(images[i].id, images[i].url));
+        }}
+      >
+        <img src={images[i].url} alt="Cat" className={"img-fluid"} />
+        {effect === "fav" && (
+          <p className={`${styles.hoverEffect} ${styles.addToFav}`}>
+            {favorite ? (
+              <FontAwesomeIcon icon={faHeart} />
+            ) : (
+              <FontAwesomeIcon icon={faRegularHeart} />
+            )}
+          </p>
+        )}
+        {effect === "name" && (
+          <p className={`${styles.hoverEffect} ${styles.breedName}`}>
+            {images[i].name}
+          </p>
+        )}
+      </div>
+    );
+  }
   return (
     <div className={`container ${styles.GridBlock}`} key={key}>
       <div className={key % 2 === 0 ? "row flex-row-reverse" : "row"}>
         <div className="col-4">
-          <img
-            src={images[0].url}
-            alt="Cat"
-            className={"img-fluid"}
-            onClick={() => {
-              clicked((cur) => cur + 1);
-              func(images[0].id);
-            }}
-          />
-          <img
-            src={images.length < 2 ? null : images[1].url}
-            alt="Cat"
-            className={images.length < 2 ? "d-none" : "img-fluid"}
-            onClick={() => {
-              clicked((cur) => cur + 1);
-              func(images[1].id);
-            }}
-          />
+          {ImageBlock(0)}
+          {images.length > 1 && ImageBlock(1)}
         </div>
         <div className="col-8">
-          <div className={`row ${styles.two_pics}`}>
-            <div className="col-6">
-              <img
-                src={images.length < 3 ? null : images[2].url}
-                alt="Cat"
-                className={images.length < 3 ? "d-none" : "img-fluid"}
-                onClick={() => {
-                  clicked((cur) => cur + 1);
-                  func(images[2].id);
-                }}
-              />
-            </div>
-            <div className="col-6">
-              <img
-                src={images.length < 4 ? null : images[3].url}
-                alt="Cat"
-                className={images.length < 4 ? "d-none" : "img-fluid"}
-                onClick={() => {
-                  clicked((cur) => cur + 1);
-                  func(images[3].id);
-                }}
-              />
-            </div>
+          <div className={`row`}>
+            <div className="col-6">{images.length > 2 && ImageBlock(2)}</div>
+            <div className="col-6">{images.length > 3 && ImageBlock(3)}</div>
           </div>
-          <div>
-            <img
-              src={images.length < 5 ? null : images[4].url}
-              alt="Cat"
-              className={images.length < 5 ? "d-none" : "img-fluid"}
-              onClick={() => {
-                clicked((cur) => cur + 1);
-                func(images[4].id);
-              }}
-            />
-          </div>
+          <div>{images.length > 4 && ImageBlock(4)}</div>
         </div>
       </div>
     </div>
