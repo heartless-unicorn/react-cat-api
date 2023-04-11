@@ -181,6 +181,7 @@ export default function Gallery() {
               </select>
             </label>
           </div>
+        </form>
       </div>
       <div>{<Grid data={gridData} func={manageFav} effect={"fav"} />}</div>
     </div>

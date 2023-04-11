@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useCallback } from "react";
 import Grid from "./Grid.module";
 import getBreeds from "../getBreeds";
 
@@ -15,7 +15,7 @@ import styles from "./breedStyles/Breeds.module.css";
 
 export default function Breeds() {
   const [gridData, setGridData] = useState([]);
-  const [isReversed, reverse] = useState(false);
+  const [isReversed, setIsReversed] = useState(false);
   const [limit, setLimit] = useState(10);
   const [breeds, setBreeds] = useState([]);
 
@@ -25,34 +25,35 @@ export default function Breeds() {
     "live_KFI6LB7w6qzReMGnCyNwSPHqXw00jkLK5V0dmEd0PwwCuDP4IjBnBs7ZnqVq7Gw6";
 
   useEffect(() => {
-    getBreeds().then((res) => setBreeds(res));
+    getBreeds().then((res) => {
+      setBreeds(res);
+    });
   }, []);
 
-  const sendData = function (arr) {
-    if (!arr) {
-      arr = breeds;
-    }
+  useEffect(() => {
+    sendData();
+  }, [isReversed, limit, breeds]);
 
+  const sendData = function (array = breeds) {
+    let arr = Array.from(array);
     if (isReversed) {
       setGridData(arr.reverse().slice(0, limit));
     } else {
       setGridData(arr.slice(0, limit));
     }
   };
-
-  useEffect(() => {
-    console.log("here");
-    sendData();
-  }, [isReversed, limit]);
-
-  const getSpecificBreed = useCallback(
-    async function (id) {
+  const getSpecificBreed = async function (id) {
+    if (id == "default") {
+      sendData();
+    } else {
       await fetch(
         `https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=${id}&api_key=${APIkey}`
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          console.log(
+            `https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=${id}&api_key=${APIkey}`
+          );
           sendData(
             data.map((el) => {
               return {
@@ -63,9 +64,8 @@ export default function Breeds() {
             })
           );
         });
-    },
-    [isReversed, limit, setGridData]
-  );
+    }
+  };
 
   function navToPic(id) {
     navigate(`${id}`);
@@ -92,7 +92,7 @@ export default function Breeds() {
               onChange={(e) => getSpecificBreed(e.target.value)}
               className={styles.breedChoices}
             >
-              <option value="defaut">All breeds</option>
+              <option value="default">All breeds</option>
               {breeds.map((el, i) => {
                 return (
                   <option value={el.breed_id} key={i}>
@@ -103,7 +103,9 @@ export default function Breeds() {
             </select>
             <select
               defaultValue="10"
-              onChange={(e) => setLimit(e.target.value)}
+              onChange={(e) => {
+                setLimit(e.target.value);
+              }}
               className={styles.limitForm}
             >
               <option value="5">Limit: 5</option>
@@ -114,7 +116,7 @@ export default function Breeds() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                reverse(false);
+                setIsReversed(false);
               }}
             >
               <FontAwesomeIcon icon={faArrowDownAZ} />
@@ -122,7 +124,7 @@ export default function Breeds() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                reverse(true);
+                setIsReversed(true);
               }}
             >
               <FontAwesomeIcon icon={faArrowDownZA} />
