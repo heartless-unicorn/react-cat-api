@@ -58,7 +58,6 @@ const store = createStore(manageLikes, persistedState);
 
 store.subscribe(() => {
   saveStateToLocalStorage(store.getState());
-  console.log(store.getState());
 });
 
 export default store;

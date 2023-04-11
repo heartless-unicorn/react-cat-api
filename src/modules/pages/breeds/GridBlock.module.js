@@ -5,17 +5,24 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons";
 
 export default function GridBlock(images, key, func, effect, storeFav) {
-  const favorite = storeFav && Array.from(storeFav);
+  const favorite = storeFav !== undefined ? Array.from(storeFav) : [];
+
   function ImageBlock(i) {
     function checkIfFavorite(index) {
-      return favorite.some((item) => item.id === index);
+      if (favorite) {
+        return favorite.some((item) => item.id === index);
+      } else {
+        return null;
+      }
     }
     return (
       <div
         className={`position-relative ${styles.imageBlock}`}
         onClick={() => {
           func(images[i].id, images[i].url);
-          checkIfFavorite();
+          if (storeFav !== undefined) {
+            checkIfFavorite();
+          }
         }}
       >
         <img src={images[i].url} alt="Cat" className={"img-fluid"} />
@@ -26,7 +33,6 @@ export default function GridBlock(images, key, func, effect, storeFav) {
             ) : (
               <FontAwesomeIcon icon={faRegularHeart} />
             )}
-            {/* <FontAwesomeIcon icon={faHeart} /> */}
           </p>
         )}
         {effect === "name" && (

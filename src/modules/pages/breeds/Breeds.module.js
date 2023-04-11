@@ -51,9 +51,6 @@ export default function Breeds() {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(
-            `https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=${id}&api_key=${APIkey}`
-          );
           sendData(
             data.map((el) => {
               return {

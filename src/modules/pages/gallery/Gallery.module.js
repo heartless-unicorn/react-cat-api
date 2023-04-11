@@ -53,7 +53,6 @@ export default function Gallery() {
   }, [isReversed, limit, type]);
 
   useEffect(() => {
-    console.log("here");
     fetchPics();
   }, [fetchPics]);
 
