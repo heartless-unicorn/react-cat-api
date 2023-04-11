@@ -1,6 +1,6 @@
-import { useMemo, useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Grid from "./Grid.module";
-import getBreeds from "../getBreeds";
+import getBreeds from "./getBreeds";
 
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +43,7 @@ export default function Breeds() {
     }
   };
   const getSpecificBreed = async function (id) {
-    if (id == "default") {
+    if (id === "default") {
       sendData();
     } else {
       await fetch(

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import Routes from "../../routes/Routes";
 import Search from "./Search.module";
 
-import styles from "./Navigation.module.css";
+import styles from "./style/Navigation.module.css";
 
 import logo from "../../media/logo.svg";
 import heroImg from "../../media/girl-and-pet.png";

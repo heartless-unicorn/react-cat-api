@@ -10,7 +10,7 @@ import {
   faArrowUpFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 
-import getBreeds from "../getBreeds";
+import getBreeds from "../breeds/getBreeds";
 import styles from "./styles/Gallery.module.css";
 
 export default function Gallery() {
@@ -24,7 +24,7 @@ export default function Gallery() {
 
   const [gridData, setGridData] = useState([]);
   const [limit, setLimit] = useState("10");
-  const [isReversed, reverse] = useState("RAND");
+  const [isReversed, setIsReversed] = useState("RAND");
   const [type, setType] = useState("jpg,png,gif");
   const [breeds, setBreeds] = useState([]);
 
@@ -34,11 +34,7 @@ export default function Gallery() {
     getBreeds().then((res) => setBreeds(res));
   }, []);
 
-  useEffect(() => {
-    fetchPics();
-  }, [isReversed, limit, type]);
-
-  function fetchPics() {
+  const fetchPics = useCallback(() => {
     fetch(
       ` https://api.thecatapi.com/v1/images/search?limit=${limit}&order=${isReversed}&api_key=${APIkey}&mime_types=${type}`
     )
@@ -52,26 +48,28 @@ export default function Gallery() {
             };
           })
         );
-      });
-  }
+      })
+      .catch(() => console.log("Failed to get data"));
+  }, [isReversed, limit, type]);
 
-  const sendData = useCallback(
-    function (arr) {
-      if (!arr) {
-        fetchPics();
-      } else {
-        if (isReversed) {
-          setGridData(arr.reverse().slice(0, limit));
-        } else {
-          setGridData(arr.slice(0, limit));
-        }
-      }
-    },
-    [breeds, isReversed, limit]
-  );
+  useEffect(() => {
+    console.log("here");
+    fetchPics();
+  }, [fetchPics]);
 
-  const getSpecificBreed = useCallback(
-    async function (id) {
+  const sendData = function (array = breeds) {
+    let arr = Array.from(array);
+    if (isReversed) {
+      setGridData(arr.reverse().slice(0, limit));
+    } else {
+      setGridData(arr.slice(0, limit));
+    }
+  };
+
+  const getSpecificBreed = async function (id) {
+    if (id === "default") {
+      sendData();
+    } else {
       await fetch(
         `https://api.thecatapi.com/v1/images/search?limit=20&breed_ids=${id}&api_key=${APIkey}`
       )
@@ -81,14 +79,14 @@ export default function Gallery() {
             data.map((el) => {
               return {
                 id: el.id,
-                url: `https://cdn2.thecatapi.com/images/${el.id}.jpg`,
+                url: el.url,
               };
             })
           );
         });
-    },
-    [sendData]
-  );
+    }
+  };
+  useEffect(() => {}, [dispatch]);
 
   function manageFav(id, url) {
     if (isFavorite(id)) {
@@ -96,7 +94,6 @@ export default function Gallery() {
         type: "REMOVE_FROM_FAVORITE",
         payload: id,
       });
-      return false;
     } else {
       dispatch({
         type: "ADD_TO_FAVORITE",
@@ -105,7 +102,6 @@ export default function Gallery() {
           url: url,
         },
       });
-      return true;
     }
   }
 
@@ -135,7 +131,7 @@ export default function Gallery() {
               <p>Order:</p>
               <select
                 defaultValue="random"
-                onChange={(e) => reverse(e.target.value)}
+                onChange={(e) => setIsReversed(e.target.value)}
               >
                 <option value="RAND">Random</option>
                 <option value="DESC">A to Z</option>
@@ -183,7 +179,16 @@ export default function Gallery() {
           </div>
         </form>
       </div>
-      <div>{<Grid data={gridData} func={manageFav} effect={"fav"} />}</div>
+      <div>
+        {
+          <Grid
+            data={gridData}
+            func={manageFav}
+            effect={"fav"}
+            storeFav={favorite}
+          />
+        }
+      </div>
     </div>
   );
 }

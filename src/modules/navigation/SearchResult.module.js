@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Grid from "../pages/breeds/Grid.module";
 
+import styles from "./style/SearchResult.module.css";
+
 export default function SearchResult() {
   let { breed } = useParams();
   const navigate = useNavigate();
@@ -34,7 +36,6 @@ export default function SearchResult() {
   }
 
   if (isReady) {
-    console.log(searchResult);
     return (
       <div>
         {searchResult.length > 0 ? (
@@ -45,6 +46,13 @@ export default function SearchResult() {
       </div>
     );
   } else {
-    return <div>Waiting...</div>;
+    return (
+      <div className={styles.lds_ring}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
 }

@@ -1,25 +1,32 @@
 import styles from "./breedStyles/GridBlock.module.css";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faRegularHeart } from "@fortawesome/free-regular-svg-icons";
 
-export default function GridBlock(images, key, func, effect) {
+export default function GridBlock(images, key, func, effect, storeFav) {
+  const favorite = storeFav && Array.from(storeFav);
   function ImageBlock(i) {
+    function checkIfFavorite(index) {
+      return favorite.some((item) => item.id === index);
+    }
     return (
       <div
         className={`position-relative ${styles.imageBlock}`}
         onClick={() => {
           func(images[i].id, images[i].url);
+          checkIfFavorite();
         }}
       >
         <img src={images[i].url} alt="Cat" className={"img-fluid"} />
         {effect === "fav" && (
           <p className={`${styles.hoverEffect} ${styles.addToFav}`}>
-            {/* {favorite ? (
+            {checkIfFavorite(images[i].id) ? (
               <FontAwesomeIcon icon={faHeart} />
             ) : (
               <FontAwesomeIcon icon={faRegularHeart} />
-            )} */}
+            )}
+            {/* <FontAwesomeIcon icon={faHeart} /> */}
           </p>
         )}
         {effect === "name" && (

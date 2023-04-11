@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import Grid from "../breeds/Grid.module";
-
+import "./votes.css";
 export default function Favorite() {
   const favorite = useSelector((store) => store["favorite"]);
   const dispatch = useDispatch();
@@ -12,9 +12,18 @@ export default function Favorite() {
       payload: id,
     });
   }
-  return (
-    <div>
-      <Grid data={favorite} func={removefromFav} effect={"fav"} />
-    </div>
-  );
+  if (favorite.length === 0) {
+    return <p className="empty">No item found</p>;
+  } else {
+    return (
+      <div>
+        <Grid
+          data={favorite}
+          func={removefromFav}
+          effect={"fav"}
+          storeFav={favorite}
+        />
+      </div>
+    );
+  }
 }
