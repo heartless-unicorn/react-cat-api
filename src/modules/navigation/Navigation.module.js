@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import Routes from "../../routes/Routes";
 import Search from "./Search.module";
@@ -10,35 +11,57 @@ import heroImg from "../../media/girl-and-pet.png";
 import votingImg from "../../media/vote-table.png";
 import breedsImg from "../../media/pet-breeds.png";
 import galleryImg from "../../media/images-search.png";
+import { useState } from "react";
 
 export default function Navigation() {
   let location = useLocation();
 
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
+  const [mainMenu, showMainMenu] = useState(true);
+  console.log(mainMenu);
+
+  function manageMainMenu() {
+    showMainMenu((cur) => !cur);
+    console.log(mainMenu);
+  }
+
   return (
     <div className={`container-fluid ${styles.Navigation}`}>
       <div className="row flex-row-reverse">
-        <div className={`col-6`}>
-          <div>
-            {location.pathname !== "/" ? (
-              <Search />
-            ) : (
-              <div>
-                <div className={styles.rectangle}></div>
-                <img
-                  src={heroImg}
-                  alt="Girl and Cat"
-                  className={`img-fluid ${styles.heroImg}`}
-                />
-              </div>
-            )}
-          </div>
+        <div
+          className={
+            isTabletOrMobile ? (mainMenu ? `d-none` : `d-block`) : `col-6`
+          }
+        >
+          {location.pathname !== "/" ? (
+            <Search menuManager={manageMainMenu} />
+          ) : (
+            <div className={styles.homescreenArt}>
+              <div className={styles.rectangle}></div>
+              <img
+                src={heroImg}
+                alt="Girl and Cat"
+                className={`img-fluid ${styles.heroImg}`}
+              />
+            </div>
+          )}
+
           <div
             className={`${location.pathname !== "/" ? styles.main_info : null}`}
           >
             <Routes />
           </div>
         </div>
-        <div className={`col-6 ${styles.nav_module}`}>
+        <div
+          className={
+            isTabletOrMobile
+              ? mainMenu
+                ? ` ${styles.nav_module}`
+                : `d-none`
+              : `col-6 ${styles.nav_module}`
+          }
+        >
           <div className={styles.hero}>
             <img src={logo} alt="PetsPaw Logo" />
             <h1>Hello!</h1>
@@ -48,7 +71,12 @@ export default function Navigation() {
 
           <div className={`row ${styles.nav_box}`}>
             <div className="col">
-              <Link to="/voting">
+              <Link
+                to="/voting"
+                onClick={() => {
+                  isTabletOrMobile && showMainMenu(false);
+                }}
+              >
                 <div className={` ${styles.votingNav} ${styles.nav_container}`}>
                   <img src={votingImg} alt="Voting" className={`img-fluid`} />
                 </div>
@@ -56,7 +84,12 @@ export default function Navigation() {
               </Link>
             </div>
             <div className="col">
-              <Link to="/breeds">
+              <Link
+                to="/breeds"
+                onClick={() => {
+                  isTabletOrMobile && showMainMenu(false);
+                }}
+              >
                 <div className={` ${styles.breedNav} ${styles.nav_container}`}>
                   <img src={breedsImg} alt="Breeds" className={`img-fluid`} />
                 </div>
@@ -64,7 +97,12 @@ export default function Navigation() {
               </Link>
             </div>
             <div className="col">
-              <Link to="/gallery">
+              <Link
+                to="/gallery"
+                onClick={() => {
+                  isTabletOrMobile && showMainMenu(false);
+                }}
+              >
                 <div
                   className={` ${styles.galleryNav} ${styles.nav_container}`}
                 >

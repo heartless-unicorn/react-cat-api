@@ -1,3 +1,9 @@
+@media (max-width: 1350px) {
+  .homescreenArt {
+    display: none;
+  }
+}
+
 .Navigation {
   padding: 30px;
 
@@ -7,6 +13,7 @@
 .nav_module {
   padding-left: 10% !important;
 }
+
 .hero img {
   margin-bottom: 85px;
 }
@@ -72,6 +79,7 @@
   background-color: #ffd280;
   border-color: rgba(255, 255, 255, 0.6);
 }
+
 .rectangle {
   width: 650px;
   position: absolute;

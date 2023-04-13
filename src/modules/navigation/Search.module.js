@@ -12,7 +12,7 @@ import {
   faHeart,
 } from "@fortawesome/free-regular-svg-icons";
 
-export default function Search() {
+export default function Search(response) {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
@@ -24,6 +24,15 @@ export default function Search() {
   return (
     <div className={`row ${styles.Search}`}>
       <div className={`col-8`}>
+        <div>
+          <button
+            onClick={() => {
+              response.menuManager();
+            }}
+          >
+            Menu
+          </button>
+        </div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
