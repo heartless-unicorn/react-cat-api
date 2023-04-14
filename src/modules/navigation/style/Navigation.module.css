@@ -3,6 +3,11 @@
     display: none;
   }
 }
+@media (max-width: 575px) {
+  .nav_box p {
+    width: 100% !important;
+  }
+}
 
 .Navigation {
   padding: 30px;
@@ -104,4 +109,15 @@
   border-radius: 20px;
   padding: 20px;
   height: 100%;
+}
+.closeMenu {
+  text-align: end;
+  font-size: 25px;
+}
+.closeMenu button {
+  border-radius: 10px;
+  border: none;
+  padding: 2px 10px 0;
+  background-color: white;
+  color: #ff868e;
 }

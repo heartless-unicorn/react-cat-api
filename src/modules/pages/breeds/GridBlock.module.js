@@ -46,14 +46,14 @@ export default function GridBlock(images, key, func, effect, storeFav) {
   return (
     <div className={`container ${styles.GridBlock}`} key={key}>
       <div className={key % 2 === 0 ? "row flex-row-reverse" : "row"}>
-        <div className="col-4">
+        <div className="col-sm-4">
           {ImageBlock(0)}
           {images.length > 1 && ImageBlock(1)}
         </div>
-        <div className="col-8">
+        <div className="col-sm-8">
           <div className={`row`}>
-            <div className="col-6">{images.length > 2 && ImageBlock(2)}</div>
-            <div className="col-6">{images.length > 3 && ImageBlock(3)}</div>
+            <div className="col-sm-6">{images.length > 2 && ImageBlock(2)}</div>
+            <div className="col-sm-6">{images.length > 3 && ImageBlock(3)}</div>
           </div>
           <div>{images.length > 4 && ImageBlock(4)}</div>
         </div>
