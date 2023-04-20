@@ -34,3 +34,8 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 575px) {
+  .lds_ring {
+    margin: 20px;
+  }
+}

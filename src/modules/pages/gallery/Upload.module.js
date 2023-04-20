@@ -65,11 +65,14 @@ export default function Upload() {
     await uploadImage(file);
   }
   function showPicture(event) {
-    const file = event.target.files[0];
-    setFileName(event.target.files[0].name);
-    setSource(URL.createObjectURL(file));
-    setStatus(true);
-    setMessage(null);
+    if (event.target.value !== "") {
+      const file = event.target.files[0];
+      console.log(event);
+      setFileName(event.target.files[0].name);
+      setSource(URL.createObjectURL(file));
+      setStatus(true);
+      setMessage(null);
+    }
   }
   return (
     <div className={styles.Upload}>
@@ -125,7 +128,7 @@ export default function Upload() {
 
             {source ? (
               <div className={styles.submitBox}>
-                <p>Image File Name: {fileName}</p>
+                <p>Image File Name: {fileName ? fileName : null}</p>
                 {status ? (
                   <input
                     type="submit"

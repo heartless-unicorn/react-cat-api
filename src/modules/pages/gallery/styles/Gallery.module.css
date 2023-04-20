@@ -28,6 +28,7 @@
   border-radius: 10px;
 }
 .uploadLink {
+  display: inline-block;
   background-color: #fbe0dc;
   color: #ff868e;
   font-weight: 500;
@@ -69,4 +70,16 @@
 }
 .formPart select::-webkit-scrollbar {
   width: 0;
+}
+
+@media (max-width: 575px) {
+  .navMenu {
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .uploadLink {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }

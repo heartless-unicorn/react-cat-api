@@ -142,3 +142,17 @@
 .success {
   color: #97eab9;
 }
+@media (max-width: 575px) {
+  .Upload {
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+  .uploadInfo h1 {
+    font-size: 20px;
+  }
+  .userPic {
+    max-width: 200px;
+    border-radius: 20px;
+  }
+}

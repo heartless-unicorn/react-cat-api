@@ -119,7 +119,8 @@ export default function Gallery() {
           </button>
           <p>Gallery</p>
         </div>
-        <Link to="/upload" className={styles.uploadLink}>
+
+        <Link to="/upload" className={`${styles.uploadLink} `}>
           <FontAwesomeIcon icon={faArrowUpFromBracket} /> Upload
         </Link>
       </div>
