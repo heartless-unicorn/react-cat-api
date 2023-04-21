@@ -1,6 +1,3 @@
-.navMenu {
-  display: flex;
-}
 .backButton {
   padding: 5px 15px;
   border: 0;
@@ -24,18 +21,15 @@
   margin-left: 10px;
   border-radius: 10px;
 }
-.navMenu form {
+.formBox {
   display: flex;
 }
-.formBox select {
-  margin-left: 10px;
-}
+
 .formBox select::-webkit-scrollbar {
   width: 0;
 }
 .formBox select {
   background-color: #f8f8f7;
-  box-shadow: 0;
   outline: 0;
   border: none;
   border-radius: 10px;
@@ -45,17 +39,27 @@
   font-size: 16px;
   line-height: 24px;
 }
-.breedChoices {
-  width: 225px;
-}
+
 .formBox button {
   background-color: #f8f8f7;
   color: #8c8c8c;
   border: none;
   margin-left: 10px;
   border-radius: 10px;
-  padding: 10px 13px;
+  padding: 8px 10px;
+}
+.breedChoises select {
+  width: 100%;
 }
 .limitForm {
-  width: 120px;
+  display: flex;
+  align-items: flex-start;
+}
+@media (max-width: 575px) {
+  .breedChoises select {
+    margin-bottom: 10px;
+  }
+  .limitForm select {
+    width: 70%;
+  }
 }

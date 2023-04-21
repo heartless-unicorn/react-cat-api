@@ -70,8 +70,8 @@ export default function Breeds() {
 
   return (
     <div className={styles.Breeds}>
-      <div className={styles.navMenu}>
-        <div>
+      <div className={`${styles.navMenu} row`}>
+        <div className="col-md-4 p-0 d-flex align-items-start">
           <button
             onClick={() => {
               navigate(-1);
@@ -81,51 +81,51 @@ export default function Breeds() {
             {" "}
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
+          <p>Breeds</p>
         </div>
-        <p>Breeds</p>
-        <div className={styles.formBox}>
-          <form>
-            <select
-              onChange={(e) => getSpecificBreed(e.target.value)}
-              className={styles.breedChoices}
-            >
-              <option value="default">All breeds</option>
-              {breeds.map((el, i) => {
-                return (
-                  <option value={el.breed_id} key={i}>
-                    {el.name}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              defaultValue="10"
-              onChange={(e) => {
-                setLimit(e.target.value);
-              }}
-              className={styles.limitForm}
-            >
-              <option value="5">Limit: 5</option>
-              <option value="10">Limit: 10</option>
-              <option value="15">Limit: 15</option>
-              <option value="20">Limit: 20</option>
-            </select>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsReversed(false);
-              }}
-            >
-              <FontAwesomeIcon icon={faArrowDownAZ} />
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsReversed(true);
-              }}
-            >
-              <FontAwesomeIcon icon={faArrowDownZA} />
-            </button>
+        <div className={`${styles.formBox} col-md-8 p-0`}>
+          <form className="row w-100">
+            <div className={`${styles.breedChoises} col-sm-6`}>
+              <select onChange={(e) => getSpecificBreed(e.target.value)}>
+                <option value="default">All breeds</option>
+                {breeds.map((el, i) => {
+                  return (
+                    <option value={el.breed_id} key={i}>
+                      {el.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className={`col-sm-6 ${styles.limitForm}`}>
+              <select
+                defaultValue="10"
+                onChange={(e) => {
+                  setLimit(e.target.value);
+                }}
+              >
+                <option value="5">Limit: 5</option>
+                <option value="10">Limit: 10</option>
+                <option value="15">Limit: 15</option>
+                <option value="20">Limit: 20</option>
+              </select>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsReversed(false);
+                }}
+              >
+                <FontAwesomeIcon icon={faArrowDownAZ} />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsReversed(true);
+                }}
+              >
+                <FontAwesomeIcon icon={faArrowDownZA} />
+              </button>
+            </div>
           </form>
         </div>
       </div>

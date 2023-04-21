@@ -115,3 +115,12 @@
 .infoBox span {
   color: #1d1d1d;
 }
+
+@media (max-width: 575px) {
+  .lds_ring {
+    margin: 20px;
+  }
+  .selectedBreedNav {
+    margin-bottom: 10px;
+  }
+}

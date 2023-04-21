@@ -142,7 +142,7 @@
 .success {
   color: #97eab9;
 }
-@media (max-width: 575px) {
+@media (max-width: 1250px) {
   .Upload {
     width: 100%;
     top: 0;

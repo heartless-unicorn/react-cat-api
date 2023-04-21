@@ -40,8 +40,19 @@
   font-size: 23px;
   padding: 10px 15px;
 }
+
+@media (max-width: 1224px) {
+  .menuButton {
+    position: absolute;
+    top: 35px;
+  }
+  .searchRow {
+    margin-left: 50px !important;
+  }
+}
 @media (max-width: 575px) {
   .searchRow {
+    margin-left: 0 !important;
     flex-direction: column-reverse;
   }
   .likeMenu {
